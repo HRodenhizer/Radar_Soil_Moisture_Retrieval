@@ -23,14 +23,14 @@ septmodel <- raster('C:/Users/Heidi Rodenhizer/Documents/School/NAU/Schuur Lab/R
 
 ### clean above data for joining ###################################################################################
 may.subset <- abovemay17 %>%
-  dplyr::select(Site, Point, Depth, 6, Latitude, Longitude) %>%
+  dplyr::select(Site, Point, Depth, 8, Latitude, Longitude) %>%
   rename(eps = 4) %>% # dielectric constant
   mutate(Year = 2017,
          Month = 6,
          Day = 17)
 
 sept.subset <- abovesept17 %>%
-  dplyr::select(Site, Point, Depth, 6, Latitude, Longitude) %>%
+  dplyr::select(Site, Point, Depth, 8, Latitude, Longitude) %>%
   rename(eps = 4) %>% # dielectric constant
   mutate(Year = 2017,
          Month = 9,
@@ -90,7 +90,7 @@ moisture.comparison <- may.moisture.comparison %>%
   rbind.data.frame(sept.moisture.comparison) %>%
   gather(key = 'Depth', value = 'hydrosense.eps', eps.12cm:eps.6cm)
 
-# write.csv(moisture.comparison, 'C:/Users/Heidi Rodenhizer/Documents/School/NAU/Schuur Lab/Remote Sensing/Soil_Moisture_Model/Richard_run_using_Bircher/model_field_comparison.csv', row.names = FALSE)
+# write.table(moisture.comparison, 'C:/Users/Heidi Rodenhizer/Documents/School/NAU/Schuur Lab/Remote Sensing/Soil_Moisture_Model/Richard_run_using_Bircher/model_field_comparison.txt', row.names = FALSE, sep = '\t')
 
 ggplot(moisture.comparison, aes(x = hydrosense.eps, y = model.eps)) +
   geom_point() +
